@@ -5,6 +5,7 @@ import "modern-normalize";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -44,12 +45,14 @@ export default function RootLayout({
       <body className={`${robotoSans.variable}`}>
         <div className="wrapper">
           <TanStackProvider>
-            <Header />
-            <main className="main">
-              {children}
-              {modal}
-            </main>
-            <Footer />
+            <AuthProvider>
+              <Header />
+              <main className="main">
+                {children}
+                {modal}
+              </main>
+              <Footer />
+            </AuthProvider>
           </TanStackProvider>
         </div>
       </body>

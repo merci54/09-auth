@@ -1,0 +1,61 @@
+"use client";
+
+import Link from "next/link";
+import css from "./AuthNavigation.module.css";
+import { useAuthStore } from "@/lib/store/authStore";
+import { logout } from "@/lib/api/clientApi";
+import { useRouter } from "next/navigation";
+
+export default function AuthNavigation() {
+  const { isAuth, user, clearIsAuth } = useAuthStore();
+  const router = useRouter();
+  const handleLogout = async () => {
+    await logout();
+    clearIsAuth();
+    router.push("/sign-in");
+  };
+  return (
+    <ul className={css.navigationList}>
+      {isAuth ? (
+        <>
+          <li className={css.navigationItem}>
+            <Link
+              href="/profile"
+              prefetch={false}
+              className={css.navigationLink}
+            >
+              Profile
+            </Link>
+          </li>
+          <li className={`${css.navigationItem}, ${css.loginItem}`}>
+            <p className={css.userEmail}>{user?.username}</p>
+            <button onClick={handleLogout} className={css.logoutButton}>
+              Logout
+            </button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className={css.navigationItem}>
+            <Link
+              href="/sign-in"
+              prefetch={false}
+              className={css.navigationLink}
+            >
+              Login
+            </Link>
+          </li>
+          <li className={css.navigationItem}>
+            <Link
+              href="/sign-up"
+              prefetch={false}
+              className={css.navigationLink}
+            >
+              Sign up
+            </Link>
+          </li>
+        </>
+      )}
+    </ul>
+  );
+}

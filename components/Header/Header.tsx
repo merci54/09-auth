@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import css from "./Header.module.css";
 import TagsMenu from "../TagsMenu/TagsMenu";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function Header() {
+  const { isAuth } = useAuthStore();
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Home">
@@ -13,8 +18,13 @@ export default function Header() {
           <li>
             <Link href="/">Home</Link>
           </li>
+          {isAuth && (
+            <li>
+              <TagsMenu />
+            </li>
+          )}
           <li>
-            <TagsMenu />
+            <AuthNavigation />
           </li>
         </ul>
       </nav>

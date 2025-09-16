@@ -1,6 +1,6 @@
 import Link from "next/link";
 import css from "./SidebarNotes.module.css";
-import { menuTags } from "@/lib/api";
+import { menuTags } from "@/lib/api/clientApi";
 
 export default function SidebarNotes() {
   return (

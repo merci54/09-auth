@@ -1,4 +1,4 @@
-import { fetchNoteById } from "@/lib/api";
+import { fetchNoteById } from "@/lib/api/clientApi";
 import {
   dehydrate,
   HydrationBoundary,
@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import NoteDetails from "./NoteDetails.client";
 import { Metadata } from "next";
+import { fetchNoteByIdServer } from "@/lib/api/serverApi";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -13,7 +14,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const note = await fetchNoteById(id);
+  const note = await fetchNoteByIdServer(id);
 
   return {
     title: `${note.title.slice(0, 30)}`,

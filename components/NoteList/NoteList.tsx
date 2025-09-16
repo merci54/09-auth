@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Note } from "../../types/note";
 import css from "./NoteList.module.css";
-import { deleteNote } from "@/lib/api";
+import { deleteNote } from "@/lib/api/clientApi";
 import Link from "next/link";
 
 interface NoteListProps {
@@ -22,8 +22,12 @@ export default function NoteList({ notes }: NoteListProps) {
 
   return (
     <ul className={css.list}>
-      {notes.map((note) => (
-        <li key={note.id} className={css.listItem}>
+      {notes.map((note, index) => (
+        <li
+          key={note.id}
+          className={css.listItem}
+          style={{ "--animation-order": index } as React.CSSProperties}
+        >
           <h2 className={css.title}>{note.title}</h2>
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>

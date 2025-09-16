@@ -12,3 +12,8 @@ export interface NewNoteData {
   title?: string;
   content?: string;
 }
+
+export interface fetchNotesProps {
+  notes: Note[];
+  totalPages: number;
+}
