@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NoteHub",
     description: "Write, edit and search your notes. ",
-    url: "https://soliq.rest/",
+    url: `${process.env.NEXT_PUBLIC_API_URL}`,
     siteName: "NoteHub",
     images: [
       {

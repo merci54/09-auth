@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${slug[0]} notes`,
       description: `Here you can find ${slug[0]} notes`,
-      url: `https://soliq.rest/${slug[0]}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/notes/filter/${slug[0]}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
