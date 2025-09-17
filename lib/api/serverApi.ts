@@ -1,7 +1,7 @@
 import { fetchNotesProps, Note } from "@/types/note";
 import { nextServer } from "./api";
 import { cookies } from "next/headers";
-import { CheckSessionRequest } from "@/types/user";
+import { User } from "@/types/user";
 
 export const fetchNotesServer = async (
   page: number,
@@ -32,6 +32,9 @@ export const fetchNoteByIdServer = async (noteId: Note["id"]) => {
   return res.data;
 };
 
+export interface CheckSessionRequest {
+  success: boolean;
+}
 export const checkServerSession = async () => {
   const cookieStore = await cookies();
   const res = await nextServer.get<CheckSessionRequest>("/auth/session", {
@@ -40,4 +43,14 @@ export const checkServerSession = async () => {
     },
   });
   return res;
+};
+
+export const getMeServer = async () => {
+  const cookieStore = await cookies();
+  const res = await nextServer.get<User>("/users/me", {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return res.data;
 };

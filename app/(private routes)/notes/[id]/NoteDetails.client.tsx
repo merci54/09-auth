@@ -8,20 +8,24 @@ import Link from "next/link";
 
 export default function NoteDetails() {
   const { id } = useParams<{ id: string }>();
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["note", { id: id }],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
   return (
     <div className={css.container}>
-      <div className={css.item}>
-        <div className={css.header}>
-          <h2>{data?.title}</h2>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error...</div>}
+      {data && (
+        <div className={css.item}>
+          <div className={css.header}>
+            <h2>{data?.title}</h2>
+          </div>
+          <p className={css.content}>{data?.content}</p>
+          <p className={css.date}>{data?.createdAt}</p>
         </div>
-        <p className={css.content}>{data?.content}</p>
-        <p className={css.date}>{data?.createdAt}</p>
-      </div>
+      )}
       <Link className={css.back} href="/notes/filter/All">
         Back to all notes
       </Link>

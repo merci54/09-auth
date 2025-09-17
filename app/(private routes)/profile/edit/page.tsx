@@ -19,11 +19,11 @@ export default function EditProfilePage() {
   const handleSaveUser = async (formData: FormData) => {
     try {
       const newUsername = formData.get("username") as string;
+      setUsername(newUsername);
       const updated = await updateMe({ username });
 
       setUser(updated);
-      await updateMe({ username: newUsername });
-      setUsername(newUsername);
+
       router.push("/profile");
     } catch (error) {
       console.error("Failed to fetch user:", error);
@@ -70,12 +70,12 @@ export default function EditProfilePage() {
 
         <form className={css.profileInfo} action={handleSaveUser}>
           <div className={css.usernameWrapper}>
-            <label htmlFor="username">Username: {username}</label>
+            <label htmlFor="username">Username: {user?.username}</label>
             <input
               name="username"
               id="username"
               type="text"
-              defaultValue={username}
+              value={username}
               className={css.input}
               onChange={handleChange}
             />

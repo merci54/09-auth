@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function AuthProvider({ children }: Props) {
-  const { setUser, clearIsAuth } = useAuthStore();
+  const { setUser, clearIsAuthenticated } = useAuthStore();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -18,11 +18,11 @@ export default function AuthProvider({ children }: Props) {
         const user = await getMe();
         if (user) setUser(user);
       } else {
-        clearIsAuth();
+        clearIsAuthenticated();
       }
     };
 
     fetchUser();
-  }, [setUser, clearIsAuth]);
+  }, [setUser, clearIsAuthenticated]);
   return children;
 }

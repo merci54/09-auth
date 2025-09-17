@@ -1,12 +1,30 @@
-"use client";
-
 import Link from "next/link";
 import css from "./ProfilePage.module.css";
 import Image from "next/image";
-import { useAuthStore } from "@/lib/store/authStore";
+import { Metadata } from "next";
+import { getMeServer } from "@/lib/api/serverApi";
 
-export default function ProfilePage() {
-  const { user } = useAuthStore();
+export const metadata: Metadata = {
+  title: "Profile Page",
+  description: "Your personal profile data.",
+  openGraph: {
+    title: "Profile Page",
+    description: "Your personal profile data.",
+    url: `${process.env.NEXT_PUBLIC_API_URL}/profile`,
+    siteName: "NoteHub",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NoteHub",
+      },
+    ],
+  },
+};
+
+export default async function ProfilePage() {
+  const user = await getMeServer();
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>

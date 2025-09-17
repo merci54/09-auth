@@ -7,7 +7,7 @@ import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import { useAuthStore } from "@/lib/store/authStore";
 
 export default function Header() {
-  const { isAuth } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Home">
@@ -18,7 +18,7 @@ export default function Header() {
           <li>
             <Link href="/">Home</Link>
           </li>
-          {isAuth && (
+          {isAuthenticated && (
             <li>
               <TagsMenu />
             </li>

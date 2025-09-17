@@ -1,11 +1,6 @@
 import { fetchNotesProps, Note } from "@/types/note";
 import { nextServer } from "./api";
-import {
-  AuthProps,
-  CheckSessionRequest,
-  UpdateMeProps,
-  User,
-} from "@/types/user";
+import { AuthProps, User } from "@/types/user";
 
 export const menuTags = [
   "All",
@@ -62,6 +57,10 @@ export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
 
+export interface CheckSessionRequest {
+  success: boolean;
+}
+
 export const checkSession = async () => {
   const res = await nextServer.get<CheckSessionRequest>("/auth/session");
   return res.data.success;
@@ -70,6 +69,11 @@ export const checkSession = async () => {
 export const getMe = async () => {
   const res = await nextServer.get<User>("/users/me");
   return res.data;
+};
+
+export type UpdateMeProps = {
+  username: string;
+  email?: string;
 };
 
 export const updateMe = async (data: UpdateMeProps) => {

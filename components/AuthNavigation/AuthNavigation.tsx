@@ -7,16 +7,16 @@ import { logout } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 
 export default function AuthNavigation() {
-  const { isAuth, user, clearIsAuth } = useAuthStore();
+  const { isAuthenticated, user, clearIsAuthenticated } = useAuthStore();
   const router = useRouter();
   const handleLogout = async () => {
     await logout();
-    clearIsAuth();
+    clearIsAuthenticated();
     router.push("/sign-in");
   };
   return (
     <ul className={css.navigationList}>
-      {isAuth ? (
+      {isAuthenticated ? (
         <>
           <li className={css.navigationItem}>
             <Link
