@@ -24,6 +24,7 @@ export default function EditProfilePage() {
       setUser(updated);
       await updateMe({ username: newUsername });
       setUsername(newUsername);
+      router.push("/profile");
     } catch (error) {
       console.error("Failed to fetch user:", error);
     }
