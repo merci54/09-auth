@@ -15,8 +15,8 @@ export default function NoteDetails() {
   });
   return (
     <div className={css.container}>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error...</div>}
+      {isLoading && <p className={css.loading}>Loading...</p>}
+
       {data && (
         <div className={css.item}>
           <div className={css.header}>
@@ -26,6 +26,7 @@ export default function NoteDetails() {
           <p className={css.date}>{data?.createdAt}</p>
         </div>
       )}
+
       <Link className={css.back} href="/notes/filter/All">
         Back to all notes
       </Link>

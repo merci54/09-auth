@@ -6,7 +6,11 @@ import { useAuthStore } from "@/lib/store/authStore";
 import { logout } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 
-export default function AuthNavigation() {
+type Props = {
+  variant: "mobile" | "desktop";
+};
+
+export default function AuthNavigation({ variant = "desktop" }: Props) {
   const { isAuthenticated, user, clearIsAuthenticated } = useAuthStore();
   const router = useRouter();
   const handleLogout = async () => {
@@ -15,7 +19,9 @@ export default function AuthNavigation() {
     router.push("/sign-in");
   };
   return (
-    <ul className={css.navigationList}>
+    <ul
+      className={`${variant === "mobile" ? css.navigationListMobile : css.navigationList}`}
+    >
       {isAuthenticated ? (
         <>
           <li className={css.navigationItem}>

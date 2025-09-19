@@ -7,6 +7,7 @@ import LoadingButton from "../LoadingButton/LoadingButton";
 import { useRouter } from "next/navigation";
 import { useNoteStore } from "@/lib/store/noteStore";
 import { Note } from "@/types/note";
+import toast from "react-hot-toast";
 
 export default function NoteForm() {
   const queryClient = useQueryClient();
@@ -16,6 +17,7 @@ export default function NoteForm() {
   const { mutate, isPending } = useMutation({
     mutationFn: createNote,
     onSuccess() {
+      toast.success("Note has been created!");
       clearDraft();
       router.push("/notes/filter/All");
       queryClient.invalidateQueries({ queryKey: ["notes"] });

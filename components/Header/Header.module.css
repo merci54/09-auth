@@ -36,3 +36,21 @@
 .navigation li a:hover {
   color: #ddd;
 }
+
+.mobileNav {
+  display: none;
+}
+
+.desktopNav {
+  display: flex;
+}
+
+@media screen and (max-width: 700px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+}

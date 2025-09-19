@@ -8,7 +8,7 @@ interface Props {
 export default function LayoutNotes({ sidebar, children }: Props) {
   return (
     <div className={css.container}>
-      <aside className={css.sidebar}>{sidebar}</aside>
+      <aside className={`${css.sidebar} ${css.block}`}>{sidebar}</aside>
       <div className={css.notesWrapper}>{children}</div>
     </div>
   );

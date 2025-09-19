@@ -1,14 +1,22 @@
 .navigationList {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.navigationListMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
   margin: 0;
   padding: 0;
 }
 
 .userEmail {
   color: white;
-  margin-right: 0.5rem;
   font-size: 1rem;
+  margin: 0;
 }
 
 .logoutButton {
@@ -48,4 +56,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+  justify-content: center;
 }
