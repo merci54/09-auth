@@ -11,7 +11,6 @@ import * as Yup from "yup";
 import css from "./SignInPage.module.css";
 import toast from "react-hot-toast";
 
-// схема валидации Yup
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
@@ -38,9 +37,13 @@ export default function SignInPage() {
             }
           } catch (err) {
             const error = err as ApiError;
-            setStatus(
-              error.response?.data.error ?? error.message ?? "Some error..."
-            );
+            if (error.response?.status === 401) {
+              setStatus("Invalid email or password");
+            } else {
+              setStatus(
+                error.response?.data.error ?? error.message ?? "Some error..."
+              );
+            }
           } finally {
             setSubmitting(false);
           }

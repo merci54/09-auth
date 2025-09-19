@@ -2,7 +2,7 @@
 
 import Modal from "@/components/Modal/Modal";
 import { useRouter } from "next/navigation";
-import css from "@/app/Loading.module.css";
+import css from "@/components/Loader/Loader.module.css";
 
 export default function Loading() {
   const router = useRouter();

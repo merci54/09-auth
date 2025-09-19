@@ -18,18 +18,18 @@ export default function MobileMenuOverlay({ isOpen, onClose }: Props) {
   const pathname = usePathname();
   const prevPathRef = useRef(pathname);
 
-  // блокировка скролла и Esc
   useEffect(() => {
-    if (isOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === `Escape`) {
+        onClose();
+      }
     };
 
-    if (isOpen) window.addEventListener("keydown", onKey);
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
     return () => {
-      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
