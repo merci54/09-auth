@@ -16,6 +16,7 @@ export default function NoteDetails() {
   return (
     <div className={css.container}>
       {isLoading && <p className={css.loading}>Loading...</p>}
+      {isError && <p className={css.error}>Error...</p>}
 
       {data && (
         <div className={css.item}>
