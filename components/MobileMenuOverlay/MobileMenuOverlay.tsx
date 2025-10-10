@@ -5,7 +5,7 @@ import TagsMenu from "../TagsMenu/TagsMenu";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import css from "./MobileMenuOverlay.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 interface Props {
@@ -17,8 +17,15 @@ export default function MobileMenuOverlay({ isOpen, onClose }: Props) {
   const { isAuthenticated } = useAuthStore();
   const pathname = usePathname();
   const prevPathRef = useRef(pathname);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === `Escape`) {
         onClose();
@@ -29,7 +36,7 @@ export default function MobileMenuOverlay({ isOpen, onClose }: Props) {
     document.body.style.overflow = "hidden";
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
@@ -46,8 +53,8 @@ export default function MobileMenuOverlay({ isOpen, onClose }: Props) {
       className={`${css.overlay} ${isOpen ? css.open : css.closed}`}
       onClick={onClose}
       role="dialog"
-      aria-modal="true"
-      aria-hidden={!isOpen}
+      aria-modal={isMounted ? isOpen : false}
+      aria-hidden={isMounted ? !isOpen : true}
     >
       <div className={css.menu} onClick={(e) => e.stopPropagation()}>
         <button

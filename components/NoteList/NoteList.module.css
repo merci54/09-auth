@@ -17,21 +17,6 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 180px;
-  /* Animation properties */
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: calc(
-    var(--animation-order) * 0.2s
-  ); /* Increased delay for sequential effect */
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.listItem:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
@@ -97,21 +82,6 @@
   font-size: 14px;
   color: #fff;
   transition: background-color 0.2s ease;
+
   border-radius: 4px;
-}
-
-.details:hover {
-  background-color: #218838;
-}
-
-/* Keyframes for fade-in and slide-up animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

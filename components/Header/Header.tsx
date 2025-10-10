@@ -39,7 +39,6 @@ export default function Header() {
         </ul>
       </nav>
 
-      {/* Оверлей всегда в DOM — виден только когда isOpen */}
       <MobileMenuOverlay isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   );
